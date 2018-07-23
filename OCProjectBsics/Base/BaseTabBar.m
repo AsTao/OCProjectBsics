@@ -17,6 +17,16 @@
 
 @implementation BaseTabBar
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.textColor = [UIColor blueColor];
+        self.highlightedTextColor = [UIColor blackColor];
+    }
+    return self;
+}
+
 - (void)addTabbarItems:(NSArray<NSString *> *)names {
     
     if (_items == nil) {
@@ -65,11 +75,12 @@
         label.text = title;
         label.font = [UIFont systemFontOfSize:10];
         label.textAlignment = NSTextAlignmentCenter;
-        label.textColor = _RGB(0x989998);
-        label.highlightedTextColor = _RGB(0x1277EB);
+        label.textColor = _textColor;
+        label.highlightedTextColor = _highlightedTextColor;
         label.tag = i + 10;
         [_labels addObject:label];
         [self addSubview:label];
+
     }
 }
 

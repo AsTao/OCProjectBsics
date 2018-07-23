@@ -13,4 +13,7 @@
 - (void)addTabbarItems:(NSArray<NSString *> *)names;
 - (void)addTabbarTitles:(NSArray<NSString *> *)titles;
 - (void)selectedIndex:(NSInteger)index;
+
+@property (nonatomic,strong) UIColor *textColor;
+@property (nonatomic,strong) UIColor *highlightedTextColor;
 @end
