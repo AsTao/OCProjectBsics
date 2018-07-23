@@ -10,7 +10,7 @@
 #import "BaseTabBar.h"
 
 @interface BaseTabBarController ()
-@property (nonatomic,strong) BaseTabBar *customTabbar;
+
 @end
 
 @implementation BaseTabBarController

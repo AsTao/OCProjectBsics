@@ -8,6 +8,7 @@
 
 @import UIKit;
 
+@class BaseTabBar;
 @interface BaseTabBarController : UITabBarController
-
+@property (nonatomic,strong) BaseTabBar *customTabbar;
 @end
