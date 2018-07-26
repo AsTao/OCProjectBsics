@@ -10,9 +10,9 @@
 @import Foundation;
 
 @interface HttpBaseModel : NSObject
-@property (nonatomic, strong) NSString *returnCode;
-@property (nonatomic, strong) NSString *returnMsg;
-@property (nonatomic, strong) id data;
+@property (nonatomic, assign) NSInteger c;
+@property (nonatomic, strong) NSString *m;
+@property (nonatomic, strong) id d;
 - (BOOL)success;
 - (BOOL)notLogged;
 @end

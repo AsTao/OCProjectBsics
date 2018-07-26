@@ -46,7 +46,7 @@
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.responseSerializer = AppConfig.shared.responseSerializer;
     [manager.requestSerializer setTimeoutInterval:30.f];
     
     __weak typeof(self) weakSelf = self;
@@ -57,18 +57,18 @@
         weakSelf.baseModel = model;
         if (model.success) {
             if ([self.responseHandle respondsToSelector:@selector(willSuccess:)]) {
-                [self.responseHandle willSuccess:model.data];
+                [self.responseHandle willSuccess:model.d];
             }
             if ([self.responseHandle respondsToSelector:@selector(didSuccess:)]) {
-                [self.responseHandle didSuccess:model.data];
+                [self.responseHandle didSuccess:model.d];
             }
         }else if (model.notLogged){
-            ToastViewMessage(self.baseModel.returnMsg);
+            ToastViewMessage(self.baseModel.m);
             UIViewController *vc = [UIStoryboard storyboardWithName:@"Login" bundle:nil].instantiateInitialViewController;
             [((BaseAppDelegate *)[UIApplication sharedApplication].delegate).currentViewController presentViewController:vc animated:true completion:nil];
         }else{
             if ([self.responseHandle respondsToSelector:@selector(didFail:errCode:errInfo:)]) {
-                [self.responseHandle didFail:parameters errCode:model.returnCode.safeInteger errInfo:model.returnMsg];
+                [self.responseHandle didFail:parameters errCode:model.c errInfo:model.m];
             }
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

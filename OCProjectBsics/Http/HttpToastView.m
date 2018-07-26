@@ -91,6 +91,7 @@
     }
 }
 
+
 - (void)remove{
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(remove) object:nil];
     [UIView animateWithDuration:0.25 animations:^{

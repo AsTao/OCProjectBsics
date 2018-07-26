@@ -11,17 +11,13 @@
 
 @implementation HttpBaseModel
 - (BOOL)success{
-    if ([safeString(_returnCode) isEqualToString:@"000000"]) {
+    if (_c == 0) {
         return YES;
     } else {
         return NO;
     }
 }
 - (BOOL)notLogged{
-    if ([safeString(_returnCode) isEqualToString:@"000003"]) {
-        return YES;
-    } else {
-        return NO;
-    }
+    return false;
 }
 @end

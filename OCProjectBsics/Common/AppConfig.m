@@ -39,6 +39,7 @@
         _version = [self getVersion];
         _bundleVersion = [self getBundleVersion];
         _netReachabilityStatus = AFNetworkReachabilityStatusReachableViaWiFi;
+        _responseSerializer = [AFJSONResponseSerializer serializer];
         [self startMonitoring];
     }
     return self;

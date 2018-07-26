@@ -22,10 +22,14 @@
 @property(nonatomic,strong) NSString *server_url;
 @property(nonatomic,strong) NSString *server_file_url;
 
+@property(nonatomic,strong) id responseSerializer;
+
 + (BOOL)firstBoot;
 
 + (NSString *)assembleServerUrl:(NSString *)url;
 + (NSString *)assembleServerFileUrl:(NSString *)url;
+
+
 
 
 @end
