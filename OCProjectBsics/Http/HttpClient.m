@@ -73,7 +73,12 @@
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if ([self.responseHandle respondsToSelector:@selector(didFail:errCode:errInfo:)]) {
-            [self.responseHandle didFail:parameters errCode:error.code errInfo:error.description];
+            NSData *data = error.userInfo[@"com.alamofire.serialization.response.error.data"];
+            NSString *desc = @"";
+            if (data) {
+                desc = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            }
+            [self.responseHandle didFail:parameters errCode:error.code errInfo:desc];
         }
     }];
 }
