@@ -71,7 +71,7 @@
         }else{
             if (AppConfig.shared.unifyProcessingFailed) {
                 if (AppConfig.shared.unifyProcessingFailed(model.c, model.m)) {
-                    return true;
+                    return;
                 }
             }
             if ([self.responseHandle respondsToSelector:@selector(didFail:errCode:errInfo:)]) {
@@ -86,7 +86,7 @@
         }
         if (AppConfig.shared.unifyProcessingFailed) {
             if (AppConfig.shared.unifyProcessingFailed(error.code, desc)) {
-                return true;
+                return;
             }
         }
         if ([self.responseHandle respondsToSelector:@selector(didFail:errCode:errInfo:)]) {
