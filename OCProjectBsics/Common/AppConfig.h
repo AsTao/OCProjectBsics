@@ -8,7 +8,7 @@
 
 @import Foundation;
 
-
+typedef BOOL(^GlobalFailedRequestCallback)(NSInteger,NSString *);
 
 @interface AppConfig : NSObject
 + (AppConfig *)shared;
@@ -29,7 +29,7 @@
 + (NSString *)assembleServerUrl:(NSString *)url;
 + (NSString *)assembleServerFileUrl:(NSString *)url;
 
-
+@property(nonatomic,copy) GlobalFailedRequestCallback unifyProcessingFailed;
 
 
 @end

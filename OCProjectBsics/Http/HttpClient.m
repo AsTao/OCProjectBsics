@@ -33,7 +33,9 @@
 }
 
 - (void)post:(NSString *)url parameters:(NSDictionary<NSString *,id> *)parameters{
-    
+    if (AppConfig.shared.server_url.length == 0) {
+        return;
+    }
     if (AppConfig.shared.reachabilityStatus == AFNetworkReachabilityStatusNotReachable) {
         if ([self.responseHandle respondsToSelector:@selector(didFail:errCode:errInfo:)]) {
             [self.responseHandle didFail:parameters errCode:-1 errInfo:@"Network is not reachable"];
@@ -67,17 +69,27 @@
             UIViewController *vc = [UIStoryboard storyboardWithName:@"Login" bundle:nil].instantiateInitialViewController;
             [((BaseAppDelegate *)[UIApplication sharedApplication].delegate).currentViewController presentViewController:vc animated:true completion:nil];
         }else{
+            if (AppConfig.shared.unifyProcessingFailed) {
+                if (AppConfig.shared.unifyProcessingFailed(model.c, model.m)) {
+                    return true;
+                }
+            }
             if ([self.responseHandle respondsToSelector:@selector(didFail:errCode:errInfo:)]) {
                 [self.responseHandle didFail:parameters errCode:model.c errInfo:model.m];
             }
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        if ([self.responseHandle respondsToSelector:@selector(didFail:errCode:errInfo:)]) {
-            NSData *data = error.userInfo[@"com.alamofire.serialization.response.error.data"];
-            NSString *desc = @"";
-            if (data) {
-                desc = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSData *data = error.userInfo[@"com.alamofire.serialization.response.error.data"];
+        NSString *desc = @"";
+        if (data) {
+            desc = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        }
+        if (AppConfig.shared.unifyProcessingFailed) {
+            if (AppConfig.shared.unifyProcessingFailed(error.code, desc)) {
+                return true;
             }
+        }
+        if ([self.responseHandle respondsToSelector:@selector(didFail:errCode:errInfo:)]) {
             [self.responseHandle didFail:parameters errCode:error.code errInfo:desc];
         }
     }];
