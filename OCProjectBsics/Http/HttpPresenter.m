@@ -10,6 +10,7 @@
 #import "CommonMacro.h"
 #import "HttpClient.h"
 #import "HttpStatusView.h"
+#import "AppConfig.h"
 
 @interface HttpPresenter()<HttpResponseHandle>
 
@@ -75,6 +76,12 @@
 }
 
 - (void)didFail:(id)response errCode:(NSInteger)errCode errInfo:(NSString *)errInfo{
+    if (AppConfig.shared.unifyProcessingFailed) {
+        if (AppConfig.shared.unifyProcessingFailed(errCode, errInfo)) {
+            [self.statusView remove];
+            return;
+        }
+    }
     [self.statusView showInView:self.bindView mode:HttpStatusError msg:@"SORRY~ \n请求失败了！点击空白处刷新页面" note:errInfo];
 }
 

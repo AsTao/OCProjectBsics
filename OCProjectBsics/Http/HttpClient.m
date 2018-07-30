@@ -64,16 +64,7 @@
             if ([self.responseHandle respondsToSelector:@selector(didSuccess:)]) {
                 [self.responseHandle didSuccess:model.d];
             }
-        }else if (model.notLogged){
-            ToastViewMessage(self.baseModel.m);
-            UIViewController *vc = [UIStoryboard storyboardWithName:@"Login" bundle:nil].instantiateInitialViewController;
-            [((BaseAppDelegate *)[UIApplication sharedApplication].delegate).currentViewController presentViewController:vc animated:true completion:nil];
         }else{
-            if (AppConfig.shared.unifyProcessingFailed) {
-                if (AppConfig.shared.unifyProcessingFailed(model.c, model.m)) {
-                    return;
-                }
-            }
             if ([self.responseHandle respondsToSelector:@selector(didFail:errCode:errInfo:)]) {
                 [self.responseHandle didFail:parameters errCode:model.c errInfo:model.m];
             }
@@ -83,11 +74,6 @@
         NSString *desc = @"";
         if (data) {
             desc = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        }
-        if (AppConfig.shared.unifyProcessingFailed) {
-            if (AppConfig.shared.unifyProcessingFailed(error.code, desc)) {
-                return;
-            }
         }
         if ([self.responseHandle respondsToSelector:@selector(didFail:errCode:errInfo:)]) {
             [self.responseHandle didFail:parameters errCode:error.code errInfo:desc];
