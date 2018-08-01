@@ -42,8 +42,8 @@
 
 - (void)config{
     
-    self.httpPageKey = @"currentPage";
-    self.httpPageSizeKey = @"pageSize";
+    self.httpPageKey = @"page";
+    self.httpPageSizeKey = @"page_size";
     self.ModelClass = NSDictionary.class;
 
     self.httpClient = [[HttpClient alloc] initWithHandel:self];
@@ -95,7 +95,12 @@
     if ([self.delegate respondsToSelector:@selector(tableView:requestSuccess:page:)]) {
         [((id<HttpTableViewDataHandle>)self.delegate) tableView:self requestSuccess:response page:_page];
     }else{
-        NSArray *array = [NSArray yy_modelArrayWithClass:_ModelClass json:response];
+        NSArray *array;
+        if (self.jsonDecodeKey.length > 0) {
+            array = [NSArray yy_modelArrayWithClass:_ModelClass json:response[_jsonDecodeKey]];
+        }else{
+            array = [NSArray yy_modelArrayWithClass:_ModelClass json:response];
+        }
         if (array) {
             [self.dataItems addObjectsFromArray:array];
         }

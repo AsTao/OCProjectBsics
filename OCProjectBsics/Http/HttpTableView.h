@@ -22,7 +22,7 @@
 @property(nonatomic,strong) NSString *httpPageKey;
 @property(nonatomic,strong) NSString *httpPageSizeKey;
 
-
+@property(nonatomic,strong) NSString *jsonDecodeKey;
 @end
 
 
