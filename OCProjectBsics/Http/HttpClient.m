@@ -34,6 +34,11 @@
 
 - (void)post:(NSString *)url parameters:(NSDictionary<NSString *,id> *)parameters{
     if (AppConfig.shared.server_url.length == 0) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if ([self.responseHandle respondsToSelector:@selector(didFail:errCode:errInfo:)]) {
+                [self.responseHandle didFail:parameters errCode:1003 errInfo:@"server_url is empty"];
+            }
+        });
         return;
     }
     if (AppConfig.shared.reachabilityStatus == AFNetworkReachabilityStatusNotReachable) {
@@ -68,6 +73,9 @@
             if ([self.responseHandle respondsToSelector:@selector(didFail:errCode:errInfo:)]) {
                 [self.responseHandle didFail:parameters errCode:model.c errInfo:model.m];
             }
+            if ([self.responseHandle respondsToSelector:@selector(didFailed:)]) {
+                [self.responseHandle didFailed:model.m];
+            }
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSData *data = error.userInfo[@"com.alamofire.serialization.response.error.data"];
@@ -77,6 +85,9 @@
         }
         if ([self.responseHandle respondsToSelector:@selector(didFail:errCode:errInfo:)]) {
             [self.responseHandle didFail:parameters errCode:error.code errInfo:desc];
+        }
+        if ([self.responseHandle respondsToSelector:@selector(didFailed:)]) {
+            [self.responseHandle didFailed:desc];
         }
     }];
 }
