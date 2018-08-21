@@ -8,11 +8,10 @@
 
 #import "HttpPresenter.h"
 #import "CommonMacro.h"
-#import "HttpClient.h"
 #import "HttpStatusView.h"
 #import "AppConfig.h"
 
-@interface HttpPresenter()<HttpResponseHandle>
+@interface HttpPresenter()
 
 @property (nonatomic,strong) HttpStatusView *httpStatusView;
 @end

@@ -11,6 +11,7 @@
 #import "HttpStatusView.h"
 #import "UIImage+Additions.h"
 #import "CommonMacro.h"
+#import "AppConfig.h"
 @import YYModel;
 
 @import MJRefresh;
@@ -124,6 +125,12 @@
 }
 
 - (void)didFail:(id)response errCode:(NSInteger)errCode errInfo:(NSString *)errInfo{
+    if (AppConfig.shared.unifyProcessingFailed) {
+        if (AppConfig.shared.unifyProcessingFailed(errCode, errInfo)) {
+            [self.statusView remove];
+            return;
+        }
+    }
     [self reloadData];
     [self.statusView showInView:self mode:HttpStatusError msg:@"请求失败了！点击空白处刷新页面" note:errInfo];
 }
