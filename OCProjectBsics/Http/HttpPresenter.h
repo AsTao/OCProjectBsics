@@ -10,6 +10,8 @@
 #import "HttpClient.h"
 
 
+
+
 typedef enum : NSUInteger {
     Post,
 } HTTPMethod;
@@ -25,4 +27,6 @@ typedef enum : NSUInteger {
 
 - (void)upload:(NSString *)url image:(UIImage *)image parameters:(NSDictionary *)parameters;
 
+
+- (BOOL)didFailed:(NSString *)errInfo;
 @end

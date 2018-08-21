@@ -74,6 +74,10 @@
     [self.statusView remove];
 }
 
+- (BOOL)didFailed:(NSString *)errInfo{
+    return false;
+}
+
 - (void)didFail:(id)response errCode:(NSInteger)errCode errInfo:(NSString *)errInfo{
     if (AppConfig.shared.unifyProcessingFailed) {
         if (AppConfig.shared.unifyProcessingFailed(errCode, errInfo)) {
@@ -81,7 +85,11 @@
             return;
         }
     }
-    [self.statusView showInView:self.bindView mode:HttpStatusError msg:@"SORRY~ \n请求失败了！点击空白处刷新页面" note:errInfo];
+    if ([self didFailed:errInfo]) {
+        [self.statusView remove];
+    }else{
+        [self.statusView showInView:self.bindView mode:HttpStatusError msg:@"SORRY~ \n请求失败了！点击空白处刷新页面" note:errInfo];
+    }
 }
 
 

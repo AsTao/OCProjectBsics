@@ -73,9 +73,6 @@
             if ([self.responseHandle respondsToSelector:@selector(didFail:errCode:errInfo:)]) {
                 [self.responseHandle didFail:parameters errCode:model.c errInfo:model.m];
             }
-            if ([self.responseHandle respondsToSelector:@selector(didFailed:)]) {
-                [self.responseHandle didFailed:model.m];
-            }
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSData *data = error.userInfo[@"com.alamofire.serialization.response.error.data"];
@@ -85,9 +82,6 @@
         }
         if ([self.responseHandle respondsToSelector:@selector(didFail:errCode:errInfo:)]) {
             [self.responseHandle didFail:parameters errCode:error.code errInfo:desc];
-        }
-        if ([self.responseHandle respondsToSelector:@selector(didFailed:)]) {
-            [self.responseHandle didFailed:desc];
         }
     }];
 }

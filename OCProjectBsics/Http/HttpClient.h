@@ -13,7 +13,6 @@
 @optional
 - (void)willSuccess:(id)response;
 - (void)didSuccess:(id)response;
-- (void)didFailed:(NSString *)errInfo;
 - (void)didFail:(id)response errCode:(NSInteger)errCode errInfo:(NSString *)errInfo;
 @end
 
