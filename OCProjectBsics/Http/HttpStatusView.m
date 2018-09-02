@@ -128,7 +128,7 @@
     
     [view endEditing:true];
     [self removeFromSuperview];
-    self.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
+    self.frame = CGRectMake(0, _ignoreHeight, view.frame.size.width, view.frame.size.height - _ignoreHeight);
     self.viewMode = mode;
     self.message = msg;
     self.serverMessage = note;

@@ -146,6 +146,10 @@
     
 }
 
+- (void)setIgnoreHeaderViewHeight:(CGFloat)ignoreHeaderViewHeight{
+    self.statusView.ignoreHeight = ignoreHeaderViewHeight;
+}
+
 - (void)beginRefreshing{
     if (self.dataItems.count == 0) {
         [self.statusView showInView:self];

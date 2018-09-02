@@ -14,6 +14,7 @@
 @property (nonatomic,strong) Class ModelClass;
 @property (nonatomic,strong) NSMutableArray *dataItems;
 @property (nonatomic,strong) NSString *cellReuseIdentifier;
+@property (nonatomic,assign) CGFloat ignoreHeaderViewHeight;
 - (void)beginRefreshing;
 
 

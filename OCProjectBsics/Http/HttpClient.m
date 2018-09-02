@@ -111,7 +111,6 @@
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain", @"multipart/form-data", @"application/json", @"text/html", @"image/jpeg", @"image/png", @"application/octet-stream", @"text/json", nil];
     [manager.requestSerializer setTimeoutInterval:30.f];
     
-    
     NSData *imageData = UIImageJPEGRepresentation(image, 0.2);
     __weak typeof(self) weakSelf = self;
     [manager POST:[AppConfig assembleServerUrl:url] parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
@@ -164,5 +163,45 @@
     }];
     [downloadTask resume];
 }
+
+- (void)batchRequests:(NSString *)url parameters:(NSArray<NSDictionary<NSString *,id> *> *)parameters{
+    if (AppConfig.shared.reachabilityStatus == AFNetworkReachabilityStatusNotReachable) {
+        return;
+    }
+    
+    NSString *urlString = [AppConfig assembleServerUrl:url];
+    
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_queue_t q = dispatch_get_global_queue(0, 0);
+    dispatch_group_async(group, q, ^{
+        
+        for (NSDictionary<NSString *,id> *param in parameters) {
+            AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+            manager.requestSerializer = [AFJSONRequestSerializer serializer];
+            manager.responseSerializer = AppConfig.shared.responseSerializer;
+            [manager.requestSerializer setTimeoutInterval:30.f];
+            
+            //__weak typeof(self) weakSelf = self;
+            [manager POST:urlString parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
+            } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                HttpBaseModel *model = [HttpBaseModel yy_modelWithJSON:responseObject];
+                NSLog(@"code=%@",model.c);
+                NSLog(@"message=%@",model.m);
+                dispatch_group_leave(group);
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                NSData *data = error.userInfo[@"com.alamofire.serialization.response.error.data"];
+                NSString *desc = @"";
+                if (data) {
+                    desc = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                }
+                NSLog(@"fail=%@",desc);
+                dispatch_group_leave(group);
+            }];
+        }
+        
+    });
+}
+
+
 
 @end

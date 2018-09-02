@@ -16,6 +16,7 @@ typedef enum : NSUInteger {
 } HttpStatusViewDisplayMode;
 
 @interface HttpStatusView : UIControl
+@property(nonatomic,assign) CGFloat ignoreHeight;
 @property(nonatomic,readonly) HttpStatusViewDisplayMode viewMode;
 - (void)showInView:(UIView *)view;
 - (void)showInView:(UIView *)view mode:(HttpStatusViewDisplayMode)mode;
