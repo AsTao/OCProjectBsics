@@ -52,6 +52,7 @@
 
 - (void)buildLayout{
     self.backgroundColor = _RGB(0xeaeaea);
+    self.clipsToBounds = true;
     [self addSubview:self.logoImageView];
     [self addSubview:self.messageLabel];
     [self addSubview:self.serverMessageLabel];
@@ -62,7 +63,7 @@
     [super layoutSubviews];
     
     self.indicatorView.center = CGPointMake(125, 125);
-    self.logoImageView.frame = CGRectMake((self.width-125)/2, MAX((self.height-250)/2, 0), 250, 250);
+    self.logoImageView.frame = CGRectMake((self.width-250)/2, MAX((self.height-250)/2, 0), 250, 250);
     self.messageLabel.frame = CGRectMake(20, _logoImageView.bottom + 30, self.width-40, _messageLabel.height);
     CGFloat offset = ((BaseAppDelegate *)[UIApplication sharedApplication].delegate).currentViewController.hidesBottomBarWhenPushed ? 0 : _BARH;
     self.serverMessageLabel.frame = CGRectMake(20, self.height - _serverMessageLabel.height - 20 - offset, self.width-40, _serverMessageLabel.height);
