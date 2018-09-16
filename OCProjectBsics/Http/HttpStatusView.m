@@ -65,7 +65,7 @@
     [super layoutSubviews];
     
     self.indicatorView.center = CGPointMake(125, 125);
-    self.logoImageView.frame = CGRectMake((self.width-_logoImageView.width)/2, MAX((self.height-_logoImageView.width)/2, 0), _logoImageView.width, _logoImageView.height);
+    self.logoImageView.frame = CGRectMake((self.width-_logoImageView.width)/2, MAX((self.height-_logoImageView.width)/2-_TOP, 0), _logoImageView.width, _logoImageView.height);
     self.messageLabel.frame = CGRectMake(20, _logoImageView.bottom + 30, self.width-40, _messageLabel.height);
     CGFloat offset = ((BaseAppDelegate *)[UIApplication sharedApplication].delegate).currentViewController.hidesBottomBarWhenPushed ? 0 : _BARH;
     self.serverMessageLabel.frame = CGRectMake(20, self.height - _serverMessageLabel.height - 20 - offset, self.width-40, _serverMessageLabel.height);
@@ -85,16 +85,16 @@
         {
             self.indicatorView.hidden = true;
             [self.indicatorView stopAnimating];
-            self.logoImageView.width = _failImage.size.width/[UIScreen mainScreen].scale;
-            self.logoImageView.height = _failImage.size.height/[UIScreen mainScreen].scale;
+            self.logoImageView.width = _failImage.size.width/[UIScreen mainScreen].scale*2;
+            self.logoImageView.height = _failImage.size.height/[UIScreen mainScreen].scale*2;
             self.logoImageView.image = _failImage;
         }break;
         case HttpStatusNoData:
         {
             self.indicatorView.hidden = true;
             [self.indicatorView stopAnimating];
-            self.logoImageView.width = _nodataImage.size.width/[UIScreen mainScreen].scale;
-            self.logoImageView.height = _nodataImage.size.height/[UIScreen mainScreen].scale;
+            self.logoImageView.width = _nodataImage.size.width/[UIScreen mainScreen].scale*2;
+            self.logoImageView.height = _nodataImage.size.height/[UIScreen mainScreen].scale*2;
             self.logoImageView.image = _nodataImage;
         }break;
         default:
