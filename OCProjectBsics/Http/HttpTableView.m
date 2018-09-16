@@ -8,7 +8,6 @@
 
 #import "HttpTableView.h"
 #import "HttpClient.h"
-#import "HttpStatusView.h"
 #import "UIImage+Additions.h"
 #import "CommonMacro.h"
 #import "AppConfig.h"
@@ -20,7 +19,6 @@
 @property (nonatomic,strong) MJRefreshNormalHeader *refreshHeader;
 @property (nonatomic,strong) MJRefreshBackNormalFooter *loadMoreFooter;
 @property (nonatomic,strong) HttpClient *httpClient;
-@property (nonatomic,strong) HttpStatusView *statusView;
 @property (nonatomic,strong) HttpEndingView *endingView;
 
 @end
@@ -62,7 +60,10 @@
     self.pageSize = 20;
     self.dataItems = [NSMutableArray array];
     self.dataSource = self;
+    self.failMessage = @"请求失败了！点击空白处刷新页面";
+    self.nodataMessage = @"暂无数据";
 }
+
 
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor{
@@ -109,7 +110,7 @@
     NSInteger dataCount = [self.dataSource tableView:self numberOfRowsInSection:0];
     if( dataCount == 0){
         self.mj_footer = nil;
-        [self.statusView showInView:self mode:HttpStatusNoData msg:@"暂无数据"];
+        [self.statusView showInView:self mode:HttpStatusNoData msg:_nodataMessage];
     }else{
         if (dataCount > _pageSize) {
             self.tableFooterView = nil;
@@ -132,7 +133,7 @@
         }
     }
     [self reloadData];
-    [self.statusView showInView:self mode:HttpStatusError msg:@"请求失败了！点击空白处刷新页面" note:errInfo];
+    [self.statusView showInView:self mode:HttpStatusError msg:_failMessage note:errInfo];
 }
 
 - (void)endRefreshing{

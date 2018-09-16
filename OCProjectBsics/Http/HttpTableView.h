@@ -7,6 +7,7 @@
 //
 
 @import UIKit;
+#import "HttpStatusView.h"
 
 @interface HttpTableView : UITableView
 @property (nonatomic,strong) NSString *url;
@@ -24,6 +25,11 @@
 @property(nonatomic,strong) NSString *httpPageSizeKey;
 
 @property(nonatomic,strong) NSString *jsonDecodeKey;
+
+
+@property (nonatomic,strong) HttpStatusView *statusView;
+@property (nonatomic,strong) NSString *failMessage;
+@property (nonatomic,strong) NSString *nodataMessage;
 @end
 
 

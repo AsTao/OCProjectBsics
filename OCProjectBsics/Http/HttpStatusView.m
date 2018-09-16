@@ -53,6 +53,8 @@
 - (void)buildLayout{
     self.backgroundColor = _RGB(0xeaeaea);
     self.clipsToBounds = true;
+    self.failImage = [UIImage imageNamed:@"project_fail" bundle:@"OCResource"];
+    self.nodataImage = [UIImage imageNamed:@"project_nodata" bundle:@"OCResource"];
     [self addSubview:self.logoImageView];
     [self addSubview:self.messageLabel];
     [self addSubview:self.serverMessageLabel];
@@ -83,13 +85,13 @@
         {
             self.indicatorView.hidden = true;
             [self.indicatorView stopAnimating];
-            self.logoImageView.image = [UIImage imageNamed:@"project_fail" bundle:@"OCResource"];
+            self.logoImageView.image = _failImage;
         }break;
         case HttpStatusNoData:
         {
             self.indicatorView.hidden = true;
             [self.indicatorView stopAnimating];
-            self.logoImageView.image = [UIImage imageNamed:@"project_nodata" bundle:@"OCResource"];
+            self.logoImageView.image = _nodataImage;
         }break;
         default:
             break;

@@ -8,7 +8,6 @@
 
 @import Foundation;
 
-
 typedef enum : NSUInteger {
     HttpStatusNoData,
     HttpStatusError,
@@ -16,6 +15,8 @@ typedef enum : NSUInteger {
 } HttpStatusViewDisplayMode;
 
 @interface HttpStatusView : UIControl
+@property(nonatomic,strong) UIImage *failImage;
+@property(nonatomic,strong) UIImage *nodataImage;
 @property(nonatomic,assign) CGFloat ignoreHeight;
 @property(nonatomic,readonly) HttpStatusViewDisplayMode viewMode;
 - (void)showInView:(UIView *)view;
