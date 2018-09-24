@@ -26,7 +26,7 @@
 
 @property(nonatomic,strong) NSString *jsonDecodeKey;
 
-
+@property (nonatomic,assign) BOOL showNodataView;
 @property (nonatomic,strong) HttpStatusView *statusView;
 @property (nonatomic,strong) NSString *failMessage;
 @property (nonatomic,strong) NSString *nodataMessage;

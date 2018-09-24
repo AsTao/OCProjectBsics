@@ -21,7 +21,7 @@
 
 #define isPad [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad
 #define isPhone [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone
-#define systemVersion [[UIDevice currentDevice] systemVersion]
+#define SystemVersion [[[UIDevice currentDevice] systemVersion] floatValue]
 
 
 #define _ScaleMiddle(args) (args * (_SW/375))

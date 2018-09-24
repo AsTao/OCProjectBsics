@@ -62,6 +62,7 @@
     self.dataSource = self;
     self.failMessage = @"请求失败了！点击空白处刷新页面";
     self.nodataMessage = @"暂无数据";
+    self.showNodataView = true;
 }
 
 
@@ -111,7 +112,9 @@
     if( dataCount == 0){
         self.mj_footer = nil;
         [self reloadData];
-        [self.statusView showInView:self mode:HttpStatusNoData msg:_nodataMessage];
+        if (_showNodataView) {
+            [self.statusView showInView:self mode:HttpStatusNoData msg:_nodataMessage];
+        }
     }else{
         if (dataCount > _pageSize) {
             self.tableFooterView = nil;
