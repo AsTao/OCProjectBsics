@@ -110,6 +110,7 @@
     NSInteger dataCount = [self.dataSource tableView:self numberOfRowsInSection:0];
     if( dataCount == 0){
         self.mj_footer = nil;
+        [self reloadData];
         [self.statusView showInView:self mode:HttpStatusNoData msg:_nodataMessage];
     }else{
         if (dataCount > _pageSize) {
