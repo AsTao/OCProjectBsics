@@ -114,6 +114,8 @@
         [self reloadData];
         if (_showNodataView) {
             [self.statusView showInView:self mode:HttpStatusNoData msg:_nodataMessage];
+        }else{
+            [self.statusView remove];
         }
     }else{
         if (dataCount > _pageSize) {
