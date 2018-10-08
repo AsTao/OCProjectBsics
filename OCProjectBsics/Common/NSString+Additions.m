@@ -33,6 +33,9 @@
 }
 ///@"yyyy-MM-dd"
 - (NSString *)dateFormat:(NSString *)format{
+    if(self.safeDouble == 0){
+        return @"";
+    }
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:format];
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:self.safeDouble];

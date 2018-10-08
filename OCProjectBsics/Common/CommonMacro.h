@@ -36,7 +36,7 @@
 #define iPhone5 (_SH == 568.0)
 #define iPhone6 (_SH == 667.0)
 #define iPhone6p (_SH == 736.0)
-#define iPhoneX (_SH == 812.0)
+#define iPhoneX (_SH == 812.0 || _SH == 896.0)
 
 #define _TOP  (iPhoneX ? 88 : 64)
 #define _BARH (iPhoneX ? 83 : 49)
