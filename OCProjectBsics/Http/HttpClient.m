@@ -59,7 +59,7 @@
     __weak typeof(self) weakSelf = self;
     NSString *urlString;
     if (_special_server_url.length > 0) {
-        urlString = [NSString stringWithFormat:@"%@%@",AppConfig.shared.server_url,url];
+        urlString = [NSString stringWithFormat:@"%@%@",_special_server_url,url];
     }else{
         urlString = [AppConfig assembleServerUrl:url];
     }

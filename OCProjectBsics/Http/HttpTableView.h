@@ -8,8 +8,11 @@
 
 @import UIKit;
 #import "HttpStatusView.h"
+#import "HttpClient.h"
 
 @interface HttpTableView : UITableView
+
+@property (nonatomic,strong) HttpClient *httpClient;
 @property (nonatomic,strong) NSString *url;
 @property (nonatomic,strong) NSDictionary *parameters;
 @property (nonatomic,strong) Class ModelClass;

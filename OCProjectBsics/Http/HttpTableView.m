@@ -7,7 +7,6 @@
 //
 
 #import "HttpTableView.h"
-#import "HttpClient.h"
 #import "UIImage+Additions.h"
 #import "CommonMacro.h"
 #import "AppConfig.h"
@@ -18,7 +17,6 @@
 @interface HttpTableView()<UITableViewDataSource,HttpTableViewDataHandle>
 @property (nonatomic,strong) MJRefreshNormalHeader *refreshHeader;
 @property (nonatomic,strong) MJRefreshBackNormalFooter *loadMoreFooter;
-@property (nonatomic,strong) HttpClient *httpClient;
 @property (nonatomic,strong) HttpEndingView *endingView;
 
 @end
