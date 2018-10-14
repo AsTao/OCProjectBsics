@@ -18,6 +18,7 @@
 
 @class HttpBaseModel;
 @interface HttpClient : NSObject
+@property (nonatomic,strong) NSString *special_server_url;
 @property (nonatomic,strong) NSString *cuurentRequestUrl;
 @property (nonatomic,strong) NSDictionary *cuurentRequestParameters;
 @property (nonatomic,strong) HttpBaseModel *baseModel;

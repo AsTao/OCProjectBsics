@@ -57,7 +57,13 @@
     [manager.requestSerializer setTimeoutInterval:30.f];
     
     __weak typeof(self) weakSelf = self;
-    [manager POST:[AppConfig assembleServerUrl:url] parameters:self.cuurentRequestParameters progress:^(NSProgress * _Nonnull uploadProgress) {
+    NSString *urlString;
+    if (_special_server_url.length > 0) {
+        urlString = [NSString stringWithFormat:@"%@%@",AppConfig.shared.server_url,url];
+    }else{
+        urlString = [AppConfig assembleServerUrl:url]
+    }
+    [manager POST:urlString parameters:self.cuurentRequestParameters progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
         HttpBaseModel *model = [HttpBaseModel yy_modelWithJSON:responseObject];
