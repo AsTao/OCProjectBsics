@@ -61,7 +61,7 @@
     if (_special_server_url.length > 0) {
         urlString = [NSString stringWithFormat:@"%@%@",AppConfig.shared.server_url,url];
     }else{
-        urlString = [AppConfig assembleServerUrl:url]
+        urlString = [AppConfig assembleServerUrl:url];
     }
     [manager POST:urlString parameters:self.cuurentRequestParameters progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
