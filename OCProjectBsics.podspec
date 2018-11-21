@@ -32,5 +32,5 @@ Pod::Spec.new do |s|
    s.dependency 'MJRefresh', '~> 3.1.10'
    s.dependency 'YYModel'
    s.dependency 'DGActivityIndicatorView'
-
+   s.dependency 'FMDB'
 end

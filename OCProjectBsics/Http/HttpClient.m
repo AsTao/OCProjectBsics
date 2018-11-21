@@ -63,6 +63,7 @@
     }else{
         urlString = [AppConfig assembleServerUrl:url];
     }
+    
     [manager POST:urlString parameters:self.cuurentRequestParameters progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 

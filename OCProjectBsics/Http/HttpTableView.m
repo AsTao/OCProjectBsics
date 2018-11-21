@@ -116,7 +116,7 @@
             [self.statusView remove];
         }
     }else{
-        if (dataCount > _pageSize) {
+        if (dataCount % _pageSize == 0) {
             self.tableFooterView = nil;
             self.mj_footer = _loadMoreFooter;
         }else{

@@ -15,10 +15,14 @@ PODS:
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
   - DGActivityIndicatorView (2.1.1)
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
   - MJRefresh (3.1.15.3)
-  - OCProjectBsics (0.2.2):
+  - OCProjectBsics (0.4.6):
     - AFNetworking (~> 3.0)
     - DGActivityIndicatorView
+    - FMDB
     - MJRefresh (~> 3.1.10)
     - SAMKeychain
     - YYModel
@@ -28,18 +32,28 @@ PODS:
 DEPENDENCIES:
   - OCProjectBsics (from `../`)
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AFNetworking
+    - DGActivityIndicatorView
+    - FMDB
+    - MJRefresh
+    - SAMKeychain
+    - YYModel
+
 EXTERNAL SOURCES:
   OCProjectBsics:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   DGActivityIndicatorView: ff2c76073d79692f724863c8dd38685866a03cb6
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
-  OCProjectBsics: fa0f2bc4da0641b3f718583fa697cc24c1650e10
+  OCProjectBsics: e8042b08ab5392d97fcd73c199117b8bd11ccef8
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
 PODFILE CHECKSUM: 53a71c15a130ef8fbfae25bb7051ebb6d2c2f1c5
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3
